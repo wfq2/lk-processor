@@ -1,0 +1,6 @@
+date,lkid,ticker,name,analyst,sector,pal,exposure
+20180201,C_US,C,"Citigroup Inc",Alice,Finance,1,11
+20180202,C_US,C,"Citigroup Inc",Alice,Finance,-1,10
+20180203,C_US,C,"Citigroup Inc",Alice,Finance,1,6
+20180203,C_US,C,"Citigroup Inc",Alice,Finance,1,6
+20180204,C_US,C,"Citigroup Inc",Alice,Finance,-2,10

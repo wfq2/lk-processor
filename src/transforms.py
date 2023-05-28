@@ -22,18 +22,19 @@ def update_sector_column(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def add_daily_return_column(df: pd.DataFrame) -> pd.DataFrame:
-    total_exposure = df.aggregate({"exposure": "sum"}).iloc[0]
-    total_pal = df.aggregate({"pal": "sum"}).iloc[0]
-    first_day_capital = total_exposure - total_pal
+    daily_return_df = df.set_index("date")
     first_day_date = df["date"].min()
     beginning_of_day_capital_df = (
         df.reset_index(drop=True)
         .groupby("date")
-        .aggregate({"exposure": "sum"})
-        .shift(1)
+        .aggregate({"exposure": "sum", "pal": "sum"})
     )
+    first_day_capital = (
+        beginning_of_day_capital_df.at[first_day_date, "exposure"]
+        - beginning_of_day_capital_df.at[first_day_date, "pal"]
+    )
+    beginning_of_day_capital_df = beginning_of_day_capital_df.shift(1)
     beginning_of_day_capital_df.at[first_day_date, "exposure"] = first_day_capital
-    daily_return_df = df.set_index("date")
     daily_return_df["daily_return"] = (
         daily_return_df["pal"] / beginning_of_day_capital_df["exposure"]
     )

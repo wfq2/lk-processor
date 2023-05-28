@@ -3,6 +3,7 @@ import pytest
 from src import main
 from src.persistence import get_data_input
 from src.transforms import group_by_ikid, update_sector_column, add_daily_return_column
+import pandas as pd
 
 """
 ["date", "lkid", "ticker", "name", "analyst", "sector", "pal", "exposure"]
@@ -12,6 +13,11 @@ from src.transforms import group_by_ikid, update_sector_column, add_daily_return
 @pytest.fixture()
 def one_day_test_df():
     return get_data_input("one_day_test_input.csv")
+
+
+@pytest.fixture()
+def daily_return_test_df():
+    return get_data_input("daily_return_test_input.csv")
 
 
 def test_aggregation(one_day_test_df):
@@ -33,11 +39,11 @@ def test_update_sector_column(one_day_test_df):
     output["sector"].apply(assert_it)
 
 
-def test_add_pal_column(one_day_test_df):
-    input_df = get_data_input("practical.csv")
-    output = group_by_ikid(input_df)
-    add_daily_return_column(output)
+def test_daily_return(daily_return_test_df):
+    output = add_daily_return_column(group_by_ikid(daily_return_test_df))
+    expected_returns = pd.Series([0.1, -0.09091, 0.2, -(12.0 - 10.0) / 12.0], name="daily_return")
+    pd.testing.assert_series_equal(output["daily_return"].reset_index(drop=True), expected_returns)
 
 
 def test_main():
-    main.main("practical.csv")
+    main.main("practical.csv", "blotter-new.csv")
