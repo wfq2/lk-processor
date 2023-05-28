@@ -36,4 +36,4 @@ Lastly I added a few test scenarios that were easier to validate transformations
 Depending on how much flexibility we have in retrieving the data, this could be an interesting stream processing
 scenario.  As each row comes in, we add it to an ongoing aggregation for each day.  At the end of each day
 we mark the end of day capital and use that as the starting value for the next day.  A solution like this could be considered
-to reduce the amount of processing needed at one time, and provide updates on p&l, exposure, and returns instantly
+to reduce the amount of processing needed at any one time, and to provide updates on p&l, exposure, and returns instantly.
