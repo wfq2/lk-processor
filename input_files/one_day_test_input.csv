@@ -1,0 +1,5 @@
+date,lkid,ticker,name,analyst,sector,pal,exposure
+20180201,C_US,C,"Citigroup Inc",Alice,Bintech,118700,2374000
+20180201,C_US,C,"Citigroup Inc",Alice,Bintech,-118700.00,-2374000
+20180201,C_US,C,"Citigroup Inc",Bob,Finance,87600,1752000
+20180201,C_US,C,"Citigroup Inc",Carla,Technology,-87600.00,-1752000.000

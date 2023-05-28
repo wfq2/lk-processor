@@ -5,10 +5,15 @@ name = "pypi"
 
 [packages]
 pandas = "~=2.0.1"
+pydantic = "~=1.10.8"
 
 [dev-packages]
 pytest="*"
+black = "*"
 
 [requires]
 python_version = "3.11"
 python_full_version = "3.11.3"
+
+[scripts]
+lint-fix = "black src/"
